@@ -4,18 +4,36 @@ namespace Movies\Middleware;
 
 use Laminas\Diactoros\Response\HtmlResponse;
 use Movies\BasicRenderer;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
-class RenderMoviesMiddleware
+/**
+ * Class RenderMoviesMiddleware
+ * @package Movies\Middleware
+ */
+class RenderMoviesMiddleware implements RequestHandlerInterface
 {
+    /**
+     * @var array|\Traversable
+     */
     private $movieData;
 
+    /**
+     * RenderMoviesMiddleware constructor.
+     * @param array|\Traversable $movieData
+     */
     public function __construct($movieData)
     {
         $this->movieData = $movieData;
     }
 
-    public function __invoke(ServerRequestInterface $request) {
+    /**
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     */
+    public function handle(ServerRequestInterface $request): ResponseInterface
+    {
         $renderer = (new BasicRenderer())(
             $this->movieData
         );

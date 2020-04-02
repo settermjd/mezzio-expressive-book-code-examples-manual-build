@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Application;
 use Mezzio\MiddlewareFactory;
-use Movies\BasicRenderer;
-use Psr\Http\Message\ServerRequestInterface;
+use Movies\Middleware\RenderMoviesMiddlewareFactory;
 use \Movies\Middleware\RenderMoviesMiddleware;
 
 chdir(dirname(__DIR__));
@@ -33,9 +31,12 @@ require 'vendor/autoload.php';
 
     (require 'config/pipeline.php')($app, $factory, $container);
 
-    $movieData = $container->get('MovieData');
-
-    $app->get('/', new RenderMoviesMiddleware($movieData));
+    $container->setFactory(
+        RenderMoviesMiddleware::class,
+        RenderMoviesMiddlewareFactory::class
+    );
+    
+    $app->get('/', RenderMoviesMiddleware::class);
 
     $app->run();
 })();
