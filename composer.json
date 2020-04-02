@@ -1,0 +1,15 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Movies\\": "src/Movies/"
+        }
+    },
+    "require": {
+        "laminas/laminas-config-aggregator": "^1.2",
+        "laminas/laminas-diactoros": "^2.2",
+        "laminas/laminas-servicemanager": "^3.4",
+        "mezzio/mezzio": "^3.2",
+        "mezzio/mezzio-fastroute": "^3.0",
+        "mezzio/mezzio-helpers": "^5.3"
+    }
+}
