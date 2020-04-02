@@ -35,16 +35,7 @@ require 'vendor/autoload.php';
 
     $movieData = $container->get('MovieData');
 
-    $app->get(
-        '/',
-        function (ServerRequestInterface $request) use ($movieData) {
-            return new HtmlResponse(
-                (new BasicRenderer())(
-                    $movieData
-                )
-            );
-        }
-    );
+    $app->get('/', new RenderMoviesMiddleware($movieData));
 
     $app->run();
 })();
