@@ -31,12 +31,9 @@ require 'vendor/autoload.php';
 
     (require 'config/pipeline.php')($app, $factory, $container);
 
-    $container->setFactory(
-        RenderMoviesMiddleware::class,
-        RenderMoviesMiddlewareFactory::class
+    (require 'config/routes.php')(
+        $app, $factory, $container
     );
-    
-    $app->get('/', RenderMoviesMiddleware::class);
 
     $app->run();
 })();
