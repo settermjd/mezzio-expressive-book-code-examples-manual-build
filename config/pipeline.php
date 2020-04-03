@@ -6,6 +6,7 @@ use Mezzio\Application;
 use Mezzio\Handler\NotFoundHandler;
 use Mezzio\MiddlewareFactory;
 use Mezzio\Router\Middleware\DispatchMiddleware;
+use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
 use Mezzio\Router\Middleware\RouteMiddleware;
 use Psr\Container\ContainerInterface;
 
@@ -26,6 +27,8 @@ return function (
 
     // Register the dispatch middleware in the middleware pipeline
     $app->pipe(DispatchMiddleware::class);
+
+    $app->pipe(MethodNotAllowedMiddleware::class);
 
     // At this point, if no Response is returned by any middleware, the
     // NotFoundHandler kicks in; alternately, you can provide other fallback
