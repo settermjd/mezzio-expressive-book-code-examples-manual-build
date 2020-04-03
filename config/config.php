@@ -11,6 +11,10 @@ $aggregator = new ConfigAggregator(
         \Mezzio\Helper\ConfigProvider::class,
         \Mezzio\Router\ConfigProvider::class,
         \Mezzio\Router\FastRouteRouter\ConfigProvider::class,
+
+        // Enable the Movies module's ConfigProvider
+        Movies\ConfigProvider::class,
+
         new PhpFileProvider(realpath(__DIR__) . '/autoload/{{,*.}global,{,*.}local}.php'),
     ]
 );
